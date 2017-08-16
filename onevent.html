@@ -1,0 +1,53 @@
+<head>
+	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	
+
+	<style type="text/css">
+          {
+          	
+         
+    			}
+    	</style>
+</head>
+<body>
+<div><i class="glyphicon glyphicon-home"></i></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+      
+    	</script>
+
+	<script type="text/javascript">
+      	$(document).ready(function()
+      	{
+        	
+
+		              $('.glyphicon-home').click(function(){
+               		var popup=$('<div/>');
+               		popup.css({
+                    		'position':'fixed',
+                    		'background-color':'rgba(0,0,0,0.16)',
+                    		'color':'black',
+                    		'height':'100%',
+                    		'top':'0',
+                    		'left':'0',
+                    		'right':'0',
+                    		'padding':'20%',
+                    		'text-align':'center',
+                    		'font-size':'50px'
+                    		})
+
+               			popup.text('Completed');
+               			$('body').append(popup);
+
+                    var btn=$('<input type="button" value="Submit" id="popupbtn">');
+                    popup.append(btn);
+
+               	});   
+      	});
+    </script>
+</body>
+</html>

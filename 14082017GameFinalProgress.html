@@ -60,12 +60,47 @@
         
       }
 
+     .progress-bar-holder{
+        border: 1px solid #ccc;
+        margin: 1em 0.2em;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+     }
+
+     .progress-bar{
+        height: 30px;
+        
+        
+        background: #63A25C;
+        width: 0px;
+       
+        
+       
+       
+     }
+
+     .TaskCompletion{
+        
+         text-align: left;
+         width: 800px;
+         font-weight: bold;
+          display: block;
+     }
+
+     .Timer{
      
+         display: block;
+         width: 800px;
+         font-weight: bold;
+
+     }
     </style>
   </head>
   <body>
       <div class="wrapper">
       <h2><span id="totalCount"></span> of <span id="total"></span> completed</h2>
+
                   <div class="notsafe">
                   </div>
                   <div class="notsafe">
@@ -270,8 +305,19 @@
 
       </div>
       
-
-   
+      <div class="container">
+      <div class="row">
+              <div class="progress-bar">
+              </div>
+      </div>
+      <div class="row"> Timer : <div style="display: inline;" class="Timer"></div>
+      </div>
+      <div class="row">
+              <div class="TaskCompletion">
+              </div>
+      </div>
+      </div>              
+          
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
@@ -285,30 +331,52 @@
     <script >
       
     $(document).ready(function(){
-
+              var myInterval=0;
+              var secondsTime;
+              var startTime=0;
+              var endTime=0;
               let allsafe = $('.safe').length
               $('#total').text(allsafe);
               $('.safe').mouseover(function(){
-              $(this).addClass('claimed');
-              $(this).css("background-color","yellow");
-              var claimedSafe = $('.safe.claimed').length
-              $('#totalCount').text(claimedSafe);
-              });
-              $('.glyphicon-user').mouseover(function(){
-              startAnimation();
-              });
-               $('.glyphicon-home').mouseover(function(){
-               endAnimation();
-               });
-                
-                $('.notsafe').mouseover(function(){
-                    alert('you have crossed the div');
+
+                      $(this).addClass('claimed');
+                      $(this).css("background-color","yellow");
+                      var claimedSafe = $('.safe.claimed').length
+                      $('#totalCount').text(claimedSafe);
                       
-            
-                  });
+                      var progress=((claimedSafe/allsafe)*100);
+                      
+                      $('.progress-bar').animate({'width':''+progress+'%'}, 10);
+              });
 
 
-             $('.glyphicon-home').click(function(){
+              $('.glyphicon-user').mouseover(function(){
+                startAnimation();
+                startTime=new Date();
+                secondsTime=0;
+                myInterval= setInterval (function(){
+                    $('.Timer').html(++secondsTime)
+                },1000);
+                      
+              });
+              $('.glyphicon-home').mouseover(function(){
+                   endAnimation();
+                   endTime=new Date();
+                  // var CompletionTime=((endTime-startTime)/1000);
+                  // $('.TaskCompletion').html('Your task completed in ' + CompletionTime + ' secondsTime');
+                   //alert('The Task Completed in : '+ CompletionTime + ' secondsTime');
+                   
+                   clearInterval(myInterval);
+                   $('.TaskCompletion').html('Your task completed in ' + secondsTime + ' seconds');
+                   
+              });
+                
+              $('.notsafe').mouseover(function(){
+                   alert('you have crossed the div');
+              });
+
+
+             $('.glyphicon-home').click(function(){ 
                var popup=$('<div/>');
                popup.css({
                     'position':'fixed',
@@ -322,24 +390,17 @@
                     'padding':'20%',
                     'text-align':'center',
                     'font-size':'50px'
-                    })
+                    });
 
                popup.text('Completed');
-
-               var btn=$('<input type="button" value="Submit" id="popupbtn">');
-                    popup.append(btn);
-
-              // btn.on('click',function () {
-              //  alert('Submit Button clicked');
-              //  });   
-
-               btn.click(function(){
-                alert('Submit Button clicked');
-               });
-
-
                $('body').append(popup);
                });   
+
+                $('.Timer').setInterval(function() {
+                    alert('test');
+                }, 1000);
+
+
 
               function startAnimation()
               {
